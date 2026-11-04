@@ -21,7 +21,7 @@ https://finance.yahoo.com/quote/BTC-USD/history
 S&P 500:
 https://finance.yahoo.com/quote/%5EGSPC/
 
-U.S. Treasury Bonds: Federal Reserve Economic Data (FRED), using 10 Year Treasury and 7-10 year ($IEF & $TNX)
+U.S. Treasury Bonds: using 10 Year Treasury and 7-10 year ($IEF & $TNX)
 https://finance.yahoo.com/quote/IEF/history/?period1=1577836800&period2=1790812800
 
 # Repository Structure: 
