@@ -13,16 +13,16 @@ The analysis uses historical financial data, data cleaning, statistical summarie
 
 # Data Sources:
 
-The Historical financial data are obtained from the following sources:
+The Historical financial data are obtained from Yahoo Finance Gold Plan:
 
 Bitcoin: Yahoo Finance market data (BTC).
 https://finance.yahoo.com/quote/BTC-USD/history
 
-S&P 500: Federal Reserve Economic Data (FRED), using the SP500.
-https://fred.stlouisfed.org/series/SP500
+S&P 500:
+https://finance.yahoo.com/quote/%5EGSPC/
 
-U.S. Treasury Bonds: Federal Reserve Economic Data (FRED), using 10 Year Treasury Constant Maturity Rate (DGS10).
-https://fred.stlouisfed.org/series/DGS10
+U.S. Treasury Bonds: Federal Reserve Economic Data (FRED), using 10 Year Treasury and 7-10 year ($IEF & $TNX)
+https://finance.yahoo.com/quote/IEF/history/?period1=1577836800&period2=1790812800
 
 # Repository Structure: 
 
