@@ -2,9 +2,7 @@
 - Created by Eric Chang and Seth Castorillo
 
 # Project Description:
-This project examines and compares the historical investment performance of 3 different investments: Bitcoin, S&P 500 and U.S. Federal Treasury Bonds.
-
-The primary objective is to determine how these investments performed between January 1, 2020, and October 1, 2026.
+This project examines and compares the historical investment performance of 3 different investments: Bitcoin, S&P 500 and U.S. Federal Treasury Bonds. The primary objective is to determine how these investments performed between January 1, 2020, and October 1, 2026.
 The project investigates two main research questions:
 
 If an investor invested $1,000 into Bitcoin, the S&P 500, or Federal Treasury Bonds in January 2020, which investment would have generated the highest return?
@@ -15,8 +13,16 @@ The analysis uses historical financial data, data cleaning, statistical summarie
 
 # Data Sources:
 
+The Historical financial data are obtained from the following sources:
 
+Bitcoin: Yahoo Finance historical market data (BTC-USD).
+https://finance.yahoo.com/quote/BTC-USD/history
 
+S&P 500: Federal Reserve Economic Data (FRED), using the SP500 series.
+https://fred.stlouisfed.org/series/SP500
+
+U.S. Treasury Bonds: Federal Reserve Economic Data (FRED), using the 10-Year Treasury Constant Maturity Rate (DGS10).
+https://fred.stlouisfed.org/series/DGS10
 
 # Repository Structure: 
 
