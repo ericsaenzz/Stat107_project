@@ -15,13 +15,13 @@ The analysis uses historical financial data, data cleaning, statistical summarie
 
 The Historical financial data are obtained from the following sources:
 
-Bitcoin: Yahoo Finance historical market data (BTC-USD).
+Bitcoin: Yahoo Finance market data (BTC).
 https://finance.yahoo.com/quote/BTC-USD/history
 
-S&P 500: Federal Reserve Economic Data (FRED), using the SP500 series.
+S&P 500: Federal Reserve Economic Data (FRED), using the SP500.
 https://fred.stlouisfed.org/series/SP500
 
-U.S. Treasury Bonds: Federal Reserve Economic Data (FRED), using the 10-Year Treasury Constant Maturity Rate (DGS10).
+U.S. Treasury Bonds: Federal Reserve Economic Data (FRED), using 10 Year Treasury Constant Maturity Rate (DGS10).
 https://fred.stlouisfed.org/series/DGS10
 
 # Repository Structure: 
