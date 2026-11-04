@@ -25,9 +25,22 @@ U.S. Treasury Bonds: Federal Reserve Economic Data (FRED), using the 10-Year Tre
 https://fred.stlouisfed.org/series/DGS10
 
 # Repository Structure: 
+## 3. Repository Structure
 
+The repository contains the following files:
 
-
+| File | Description |
+|:---|:---|
+| `README.md` | Provides overview of our project, describes repo files, and explains how to reproduce |
+| `00_requirements.R` | Install and loads R packages required for analysis |
+| `Functions/` | Custom R functions used for data cleaning, portfolio calculations, and visuals |
+| `Data/` | Stores original historical datasets downloaded from Yahoo Finance and FRED |
+| `Cleaning_data.Rmd` | Downloads, cleans, and preps financial datasets for analysis |
+| `02_DataProcessing.Rmd` | Processes cleaned datasets and calculates portfolio and investment returns |
+| `03_DataVisualization.Rmd` | Produces preliminary visuals and statistical summaries of investment performance |
+| `FinalReport.Rmd` | Contains written research report conclusions |
+| `FinalReport.pdf` | Knitted PDF version of the final research report |
+| `Output/` | Stores cleaned and processed datasets generated during our analysis |
 
 # Methodology:
 
