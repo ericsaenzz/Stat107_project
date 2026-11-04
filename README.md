@@ -41,8 +41,19 @@ The repository contains the following files:
 | `FinalReport.pdf` | Knitted PDF version of the final research report |
 | `Output/` | Stores cleaned and processed datasets generated during our analysis |
 
-# Methodology:
+# Methodology: 
+The analysis compares three investment portfolios over the same historical period. Two investment strategies are examined:
 
+**Initial Investment Strategy**: Each portfolio begins with an initial investment of $1,000 in January 2020. The ending portfolio values are compared to determine the historical returns of each investment.
+
+**Monthly Contribution Strategy**: Each portfolio receives an additional $500 contribution every month, regardless of market performance. The accumulated portfolio values are compared at the end of the study period.
+
+**Additional statistical measures include:**
+- Total investment return.
+- Compound annual growth rate (CAGR).
+- Monthly investment returns.
+- Investment volatility.
+- Maximum portfolio drawdown.
 
 
 # Step By Step Instructions
