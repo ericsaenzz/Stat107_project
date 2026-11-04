@@ -25,7 +25,6 @@ U.S. Treasury Bonds: Federal Reserve Economic Data (FRED), using the 10-Year Tre
 https://fred.stlouisfed.org/series/DGS10
 
 # Repository Structure: 
-## 3. Repository Structure
 
 The repository contains the following files:
 
