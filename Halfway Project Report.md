@@ -5,7 +5,6 @@ This project examines and compares the historical investment performance of 3 di
 The analysis uses historical financial data, data cleaning, statistical summaries, and visualizations to compare investment performance and risk.
 
 ---
----
 ## Introduction:
 
 The project investigates two main research questions:
