@@ -31,7 +31,7 @@ The repository contains the following files:
 |:---|:---|
 | `README.md` | Provides overview of our project, describes repo files, and explains how to reproduce |
 | `00_requirements.R` | Install and loads R packages required for analysis |
-| `01_Data.R` | Stores original historical datasets downloaded from Yahoo Finance and FRED |
+| `Data_sets` | Folder that stores original historical datasets downloaded from Yahoo Finance |
 | `02_DataProcessing.Rmd` | Processes cleaned datasets and calculates portfolio and investment returns |
 | `03_DataVisualization.Rmd` | Produces preliminary visuals and statistical summaries of investment performance |
 | `04_Functions.R` | Custom R functions used for data cleaning, portfolio calculations, and visuals |
