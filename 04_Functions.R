@@ -27,7 +27,7 @@ clean_market_data <- function(data, asset_name) {
 # output: Dataset with last available trading day observation for each month
 
 get_monthly_data <- function(data) {
-
+  
   data$Month <- as.Date(format(data$Date, "%Y-%m-01"))
   monthly_data <- data[
     !duplicated(data$Month, fromLast = TRUE),
@@ -35,7 +35,7 @@ get_monthly_data <- function(data) {
   monthly_data <- monthly_data[
     order(monthly_data$Month),
   ]
-
+  
   return(monthly_data)
 }
 #---------------------------------------- 
@@ -47,21 +47,20 @@ get_monthly_data <- function(data) {
 # output: monthly percentage returns for each asset
 
 calculate_monthly_returns <- function(data) {
+  
   monthly_returns <- data.frame(
     Month = data$Month[-1]
   )
+  
   monthly_returns$Bitcoin_Return <-
     diff(data$Bitcoin) / head(data$Bitcoin, -1)
-
-  monthly_returns$Bitcoin_Return <-
-    monthly_returns$Bitcoin_Return - 1
-
+  
   monthly_returns$SP500_Return <-
-    diff(data$SP500) / head(data$SP500, -1) - 1
-
+    diff(data$SP500) / head(data$SP500, -1)
+  
   monthly_returns$IEF_Return <-
-    diff(data$IEF) / head(data$IEF, -1) - 1
-
+    diff(data$IEF) / head(data$IEF, -1)
+  
   return(monthly_returns)
 }
 #----------------------------------------
@@ -75,13 +74,13 @@ calculate_cumulative_returns <- function(data) {
   )
   cumulative_returns$Bitcoin_Cumulative <-
     cumprod(1 + data$Bitcoin_Return)
-
+  
   cumulative_returns$SP500_Cumulative <-
     cumprod(1 + data$SP500_Return)
-
+  
   cumulative_returns$IEF_Cumulative <-
     cumprod(1 + data$IEF_Return)
-
+  
   return(cumulative_returns)
 }
 #----------------------------------------
@@ -95,13 +94,12 @@ calculate_lump_sum <- function(data, initial_investment) {
   )
   lump_sum_results$Bitcoin_Value <-
     initial_investment * data$Bitcoin_Cumulative
-
+  
   lump_sum_results$SP500_Value <-
     initial_investment * data$SP500_Cumulative
-
+  
   lump_sum_results$IEF_Value <-
     initial_investment * data$IEF_Cumulative
-
+  
   return(lump_sum_results)
-}
 #----------------------------------------

@@ -1,5 +1,5 @@
 # Load Packages
-```{r setup, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE}
 source("00_requirements.R")
 source("04_Functions.R")
 library(tidyr)
@@ -7,7 +7,7 @@ library(lubridate)
 library(knitr)
 ```
 # import datasets
-```{r import-data}
+```{r}
 btc_raw <- read.csv(
   "Data_sets/BTC-USD.csv",
   check.names = FALSE
@@ -22,14 +22,14 @@ ief_raw <- read.csv(
 )
 ```
 # intial inspection of data
-```{r initial-inspection}
+```{r}
 dim(btc_raw)
 dim(sp500_raw)
 dim(ief_raw)
 names(btc_raw)
 ```
 # check for missing data
-```{r missing-inspection}
+```{r}
 missing_summary <- data.frame(
   Dataset = c("Bitcoin", "S&P 500", "IEF"),
   Missing_Values = c(
@@ -41,13 +41,13 @@ missing_summary <- data.frame(
 missing_summary
 ```
 # Clean Datasets
-```{r clean-datasets}
+```{r}
 btc_clean <- clean_market_data(btc_raw, "Bitcoin")
 sp500_clean <- clean_market_data(sp500_raw, "S&P 500")
 ief_clean <- clean_market_data(ief_raw, "IEF")
 ```
 # Jan 1 2020 to Oct 1 2026
-```{r date-filtering}
+```{r}
 start_date <- as.Date("2020-01-01")
 end_date <- as.Date("2026-10-01")
 
@@ -66,19 +66,19 @@ ief_clean <- ief_clean[
 ```
 
 # Select variables
-```{r select-variables}
+```{r}
 btc_analysis <- btc_clean[, c("Date", "Adjusted_Close")]
 sp500_analysis <- sp500_clean[, c("Date", "Adjusted_Close")]
 ief_analysis <- ief_clean[, c("Date", "Adjusted_Close")]
 ```
 # Select monthly data
-```{r monthly-datasets}
+```{r}
 btc_monthly <- get_monthly_data(btc_analysis)
 sp500_monthly <- get_monthly_data(sp500_analysis)
 ief_monthly <- get_monthly_data(ief_analysis)
 ```
 # combine monthly datasets
-```{r combine-data}
+```{r}
 btc_temp <- btc_monthly[, c("Month", "Adjusted_Close")]
 names(btc_temp)[2] <- "Bitcoin"
 
@@ -96,7 +96,7 @@ monthly_combined <- monthly_combined[
 rownames(monthly_combined) <- NULL
 ```
 # Examine cleaned datasets
-```{r cleaned-summary}
+```{r}
 cleaned_summary <- data.frame(
   Asset = c("BTC", "SNP500", "IEF"),
   Observations = c(
@@ -123,7 +123,7 @@ cleaned_summary <- data.frame(
 cleaned_summary
 ```
 # save cleaned datasets
-```{r save-data}
+```{r}
 dir.create("Output", showWarnings = FALSE)
 save(btc_clean,sp500_clean, ief_clean, btc_monthly, sp500_monthly, ief_monthly, monthly_combined, file = "Output/cleaned_data.RData")
 write.csv(monthly_combined,"Output/monthly_combined.csv",row.names = FALSE)
