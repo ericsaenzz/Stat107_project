@@ -85,8 +85,8 @@ calculate_cumulative_returns <- function(data) {
 }
 #----------------------------------------
 # Function 3: Calculate lump sum
-# Input: Cumulative return and initial investment amount
-# Output: Portfolio value over time
+# input: Cumulative return and initial investment amount
+# output: Portfolio value over time
 
 calculate_lump_sum <- function(data, initial_investment) {
   lump_sum_results <- data.frame(
@@ -103,3 +103,36 @@ calculate_lump_sum <- function(data, initial_investment) {
   
   return(lump_sum_results)
 #----------------------------------------
+# Function 4: calculate return on monthly investment of 500
+# input: combined monthly closing prices and monthly contribution
+# output: investment value based on $500 monthly contributions
+
+simulate_monthly_investment <- function(prices, monthly_contribution = 500) {
+
+  investment_results <- data.frame(
+    Month = prices$Month
+  )
+
+  investment_results$Bitcoin_Units <-
+    cumsum(monthly_contribution / prices$Bitcoin)
+
+  investment_results$SP500_Units <-
+    cumsum(monthly_contribution / prices$SP500)
+
+  investment_results$IEF_Units <-
+    cumsum(monthly_contribution / prices$IEF)
+
+  investment_results$Bitcoin_Value <-
+    investment_results$Bitcoin_Units * prices$Bitcoin
+
+  investment_results$SP500_Value <-
+    investment_results$SP500_Units * prices$SP500
+
+  investment_results$IEF_Value <-
+    investment_results$IEF_Units * prices$IEF
+
+  investment_results$Total_Invested <-
+    seq_len(nrow(prices)) * monthly_contribution
+
+  return(investment_results)
+}
