@@ -1,0 +1,78 @@
+# Packages
+```{r setup, message=FALSE, warning=FALSE}
+source("00_requirements.R")
+source("04_Functions.R")
+```
+
+# Load Cleaned Datasets
+```{r load-data}
+load("Output/cleaned_data.RData")
+head(monthly_combined)
+dim(monthly_combined)
+```
+
+# monthly returns
+```{r monthly-returns}
+monthly_returns <- calculate_monthly_returns(monthly_combined)
+head(monthly_returns)
+```
+
+# cumulative returns
+```{r cumulative-returns}
+cumulative_returns <- calculate_cumulative_returns(monthly_returns)
+head(cumulative_returns)
+```
+
+# calculate initial $1,000 investment
+```{r lump-sum-investment}
+initial_investment <- 1000
+
+lump_sum_results <- calculate_lump_sum(
+  cumulative_returns,
+  initial_investment
+)
+head(lump_sum_results)
+```
+
+# calculate monthly investment performance
+```{r performance-summary}
+performance_summary <- data.frame(
+  Asset = c("Bitcoin", "S&P 500", "IEF"),
+  Average_Monthly_Return = c(
+    mean(monthly_returns$Bitcoin_Return),
+    mean(monthly_returns$SP500_Return),
+    mean(monthly_returns$IEF_Return)
+  ),
+  Monthly_Volatility = c(
+    sd(monthly_returns$Bitcoin_Return),
+    sd(monthly_returns$SP500_Return),
+    sd(monthly_returns$IEF_Return)
+  )
+)
+print(performance_summary)
+```
+# Examine final investment
+```{r final-investment-values}
+final_investment_values <- data.frame(
+  Asset = c("Bitcoin", "S&P 500", "IEF"),
+  Final_Value = c(
+    tail(lump_sum_results$Bitcoin_Value, 1),
+    tail(lump_sum_results$SP500_Value, 1),
+    tail(lump_sum_results$IEF_Value, 1)
+  )
+)
+print(final_investment_values)
+```
+
+# save datasets
+```{r save-data}
+dir.create("Output", showWarnings = FALSE)
+save(
+  monthly_returns,
+  cumulative_returns,
+  lump_sum_results,
+  performance_summary,
+  final_investment_values,
+  file = "Output/processed_data.RData"
+)
+```
