@@ -27,6 +27,7 @@ If an investor contributed $500 every month into each investment, regardless of 
 
 
 **File:** "Data_sets"
+
 **Desc:** Folder of csv files containing BTC, IEF and SPX historical data
 
 The Historical financial data are obtained from Yahoo Finance Gold Plan:
@@ -43,6 +44,7 @@ SPX: https://finance.yahoo.com/quote/%5ESPX/
 
 
 **File:** "03_data_visualizations.R"
+
 **Desc:** visual graphs used for interpreting our data
 
 
@@ -52,6 +54,7 @@ SPX: https://finance.yahoo.com/quote/%5ESPX/
 ## Analysis:
 
 **File:** "05_Cleaning_data.Rmd"
+
 **Desc:** Data cleaning and preprocessing
 
 **Purpose**
