@@ -1,14 +1,13 @@
-
 # Load Packages
 ```{r setup, message=FALSE, warning=FALSE}
 source("00_requirements.R")
+source("04_Functions.R")
 library(dplyr)
 library(tidyr)
 library(lubridate)
 library(knitr)
 ```
-
-# Import Datasets
+# import datasets
 ```{r import-data}
 btc_raw <- read.csv(
   "Data/BTC-USD.csv",
@@ -23,8 +22,7 @@ ief_raw <- read.csv(
   check.names = FALSE
 )
 ```
-
-# Initial Data Exploration
+# intial inspection of data
 ```{r initial-inspection}
 dim(btc_raw)
 dim(sp500_raw)
@@ -46,7 +44,12 @@ kable(
   caption = "Missing Values in Original Datasets"
 )
 ```
-
+# Clean Datasets
+```{r clean-datasets}
+btc_clean <- clean_market_data(btc_raw, "Bitcoin")
+sp500_clean <- clean_market_data(sp500_raw, "S&P 500")
+ief_clean <- clean_market_data(ief_raw, "IEF")
+```
 # Jan 1 2020 to Oct 1 2026
 ```{r date-filtering}
 start_date <- as.Date("2020-01-01")
@@ -61,43 +64,21 @@ sp500_clean <- sp500_clean %>%
 ief_clean <- ief_clean %>%
   filter(Date >= start_date, Date <= end_date)
 ```
-
-# Relevant Variables
+# Select variables
 ```{r select-variables}
 btc_analysis <- btc_clean %>%
   select(Date, Adjusted_Close)
-
 sp500_analysis <- sp500_clean %>%
   select(Date, Adjusted_Close)
-
 ief_analysis <- ief_clean %>%
   select(Date, Adjusted_Close)
 ```
-
 # Select monthly data
-```{r monthly-function}
-get_monthly_data <- function(data) {
-
-  data %>%
-    mutate(
-      Month = floor_date(Date, unit = "month")
-    ) %>%
-    group_by(Month) %>%
-    slice_max(
-      order_by = Date,
-      n = 1,
-      with_ties = FALSE
-    ) %>%
-    ungroup()
-}
-```
-
 ```{r monthly-datasets}
 btc_monthly <- get_monthly_data(btc_analysis)
 sp500_monthly <- get_monthly_data(sp500_analysis)
 ief_monthly <- get_monthly_data(ief_analysis)
 ```
-
 # combine monthly datasets
 ```{r combine-data}
 monthly_combined <- btc_monthly %>%
@@ -114,40 +95,39 @@ monthly_combined <- btc_monthly %>%
   ) %>%
   arrange(Month)
 ```
-
-# Examine  Cleaned Datasets
+# Examine cleaned datasets
 ```{r cleaned-summary}
 cleaned_summary <- data.frame(
   Asset = c("Bitcoin", "S&P 500", "IEF"),
-
   Observations = c(
     nrow(btc_clean),
     nrow(sp500_clean),
-    nrow(ief_clean),
+    nrow(ief_clean)
   ),
-
   Missing_Values = c(
     sum(is.na(btc_clean)),
     sum(is.na(sp500_clean)),
-    sum(is.na(ief_clean)),
+    sum(is.na(ief_clean))
   ),
-
   First_Date = c(
     min(btc_clean$Date),
     min(sp500_clean$Date),
-    min(ief_clean$Date),
+    min(ief_clean$Date)
   ),
-
   Last_Date = c(
     max(btc_clean$Date),
     max(sp500_clean$Date),
-    max(ief_clean$Date),
+    max(ief_clean$Date)
   )
+)
+kable(
+  cleaned_summary,
+  caption = "Summary of Cleaned Investment Datasets"
 )
 ```
 # save cleaned datasets
 ```{r save-data}
 dir.create("Output", showWarnings = FALSE)
-save(btc_clean,sp500_clean, ief_clean, btc_monthly,sp500_monthly,ief_monthly,monthly_combined,file = "Output/cleaned_data.RData")
+save(btc_clean,sp500_clean, ief_clean, btc_monthly, sp500_monthly, ief_monthly, monthly_combined, file = "Output/cleaned_data.RData")
 write.csv(monthly_combined,"Output/monthly_combined.csv",row.names = FALSE)
 ```
