@@ -98,7 +98,7 @@ rownames(monthly_combined) <- NULL
 # Examine cleaned datasets
 ```{r cleaned-summary}
 cleaned_summary <- data.frame(
-  Asset = c("Bitcoin", "S&P 500", "IEF"),
+  Asset = c("BTC", "SNP500", "IEF"),
   Observations = c(
     nrow(btc_clean),
     nrow(sp500_clean),
