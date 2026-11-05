@@ -1,5 +1,6 @@
 ---
 ## Title: Stat107 Final Project : Investment Performance Analysis
+---
 
 **Abstract:**
 This project examines and compares the historical investment performance of 3 different investments: Bitcoin, S&P 500 and U.S. Federal Treasury Bonds. The primary objective is to determine how these investments performed between January 1, 2020, and October 1, 2026. 
