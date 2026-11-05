@@ -1,5 +1,9 @@
 ## Title: Stat107 Final Project : Investment Performance Analysis
 
+**GitHub Repository Link**: https://github.com/ericsaenzz/Stat107_project
+Created by Eric Chang
+assigned group: Seth Castorillo and Yizhe Shan
+
 **Abstract:**
 This project examines and compares the historical investment performance of 3 different investments: Bitcoin, S&P 500 and U.S. Federal Treasury Bonds. Our primary objective is to determine how each investment portfolio performed between January 1, 2020, and October 1, 2026. The analysis uses financial data, data cleaning, statistical summaries, and visualizations to compare investment performance and risk.
 
@@ -87,6 +91,8 @@ The expected outcome is that BTC will demonstrate higher historical returns and 
 
 ## Contributions
 Eric Chang - Project topic, Sourcing Data, Extracting Data, Cleaning and Processing Data, Creating Visual Graphs, all files and reports associated with this project
-Yizhe Shan - na
-Seth Castorillo M - na
+
+Yizhe Shan - none
+
+Seth Castorillo M - none
 
