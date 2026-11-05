@@ -25,9 +25,10 @@ If an investor contributed $500 every month into each investment, regardless of 
 ---
 ## Data:
 
+---
 File: Data_sets
 desc: Folder of csv files containing BTC, IEF and SPX historical data
-
+---
 The Historical financial data are obtained from Yahoo Finance Gold Plan:
 
 BTC: https://finance.yahoo.com/quote/BTC-USD/history
@@ -38,18 +39,20 @@ SPX: https://finance.yahoo.com/quote/%5ESPX/
 ---
 ## Visualization:
 
+---
 File: 03_data_visualizations.R
 desc: visual graphs used for interpreting our data
-
+---
 
 
 
 ---
 ## Analysis:
 
+---
 File: 05_Cleaning_data.Rmd
 desc: Data cleaning and preprocessing
-
+---
 **Purpose**
 05_Cleaning_data.Rmd outlines the data cleaning and preprocessing for our investment performance analysis.The datasets include historical Bitcoin prices, S&P 500 values and U.S. Treasury ETF prices. The objective is to prepare consistent datasets for analysis and portfolio comparisons.
 
