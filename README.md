@@ -41,9 +41,10 @@ The repository contains the following files:
 | `Output/` | Stores cleaned and processed datasets generated during our analysis |
 
 # Methodology: 
-The analysis compares three investment portfolios over the same historical period. Two investment strategies are examined:
+The analysis compares three investment portfolios over the same historical period. Taxes and transaction costs are excluded. Two investment strategies are examined:
 
-**Initial Investment Strategy**: Each portfolio begins with an initial investment of $1,000 in January 2020. The ending portfolio values are compared to determine the historical returns of each investment.
+**Initial Investment Strategy**: Each portfolio begins with an initial investment of $1,000 in January 2020. The ending portfolio values are compared to determine the historical returns of each investment.The lump-sum strategy invests $1,000 at the January 31st 2020 closing price.
+
 
 **Monthly Contribution Strategy**: Each portfolio receives an additional $500 contribution every month, regardless of market performance. The accumulated portfolio values are compared at the end of the study period.
 
@@ -53,6 +54,8 @@ The analysis compares three investment portfolios over the same historical perio
 - Monthly investment returns
 - Investment volatility
 - Maximum portfolio drawdown
+
+The S&P 500 index comparison does not account for reinvested dividends, whereas IEF adjusted closing prices account for ETF distributions. This limits the direct comparison.
 
 
 # Step By Step Instructions
