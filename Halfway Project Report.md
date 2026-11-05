@@ -1,7 +1,11 @@
 ## Title: Stat107 Final Project : Investment Performance Analysis
 
-**GitHub Repository Link**: https://github.com/ericsaenzz/Stat107_project
+**GitHub Repository Link**: 
+
+https://github.com/ericsaenzz/Stat107_project
+
 Created by Eric Chang
+
 assigned group: Seth Castorillo and Yizhe Shan
 
 **Abstract:**
