@@ -4,9 +4,9 @@
 
 https://github.com/ericsaenzz/Stat107_project
 
-Created by Eric Chang
+**Created by Eric Chang**
 
-assigned group: Seth Castorillo and Yizhe Shan
+**Assigned Group:** Seth Castorillo and Yizhe Shan
 
 **Abstract:**
 This project examines and compares the historical investment performance of 3 different investments: Bitcoin, S&P 500 and U.S. Federal Treasury Bonds. Our primary objective is to determine how each investment portfolio performed between January 1, 2020, and October 1, 2026. The analysis uses financial data, data cleaning, statistical summaries, and visualizations to compare investment performance and risk.
