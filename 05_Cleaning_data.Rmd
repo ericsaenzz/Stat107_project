@@ -10,15 +10,15 @@ library(knitr)
 # import datasets
 ```{r import-data}
 btc_raw <- read.csv(
-  "Data/BTC-USD.csv",
+  "Data_sets/BTC-USD.csv",
   check.names = FALSE
 )
 sp500_raw <- read.csv(
-  "Data/SPX.csv",
+  "Data_sets/SPX.csv",
   check.names = FALSE
 )
 ief_raw <- read.csv(
-  "Data/IEF.csv",
+  "Data_sets/IEF.csv",
   check.names = FALSE
 )
 ```
@@ -39,10 +39,7 @@ missing_summary <- data.frame(
     sum(is.na(ief_raw))
   )
 )
-kable(
-  missing_summary,
-  caption = "Missing Values in Original Datasets"
-)
+missing_summary
 ```
 # Clean Datasets
 ```{r clean-datasets}
