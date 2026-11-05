@@ -15,11 +15,7 @@ btc_raw <- read.csv(
   check.names = FALSE
 )
 sp500_raw <- read.csv(
-  "Data/^SPX.csv",
-  check.names = FALSE
-)
-tnx_raw <- read.csv(
-  "Data/^TNX.csv",
+  "Data/SPX.csv",
   check.names = FALSE
 )
 ief_raw <- read.csv(
@@ -32,19 +28,16 @@ ief_raw <- read.csv(
 ```{r initial-inspection}
 dim(btc_raw)
 dim(sp500_raw)
-dim(tnx_raw)
 dim(ief_raw)
 names(btc_raw)
-
 ```
 # check for missing data
 ```{r missing-inspection}
 missing_summary <- data.frame(
-  Dataset = c("Bitcoin", "S&P 500", "Treasury Yield", "IEF"),
+  Dataset = c("Bitcoin", "S&P 500", "IEF"),
   Missing_Values = c(
     sum(is.na(btc_raw)),
     sum(is.na(sp500_raw)),
-    sum(is.na(tnx_raw)),
     sum(is.na(ief_raw))
   )
 )
@@ -55,7 +48,6 @@ kable(
 ```
 
 # Jan 1 2020 to Oct 1 2026
-
 ```{r date-filtering}
 start_date <- as.Date("2020-01-01")
 end_date <- as.Date("2026-10-01")
@@ -66,21 +58,11 @@ btc_clean <- btc_clean %>%
 sp500_clean <- sp500_clean %>%
   filter(Date >= start_date, Date <= end_date)
 
-tnx_clean <- tnx_clean %>%
-  filter(Date >= start_date, Date <= end_date)
-
 ief_clean <- ief_clean %>%
   filter(Date >= start_date, Date <= end_date)
 ```
 
-# 8. Select Relevant Variables
-
-For the investment performance analysis, we primarily
-need the date and adjusted closing price.
-
-The Treasury yield dataset is retained separately
-for supplementary interest-rate analysis.
-
+# Relevant Variables
 ```{r select-variables}
 btc_analysis <- btc_clean %>%
   select(Date, Adjusted_Close)
@@ -90,20 +72,9 @@ sp500_analysis <- sp500_clean %>%
 
 ief_analysis <- ief_clean %>%
   select(Date, Adjusted_Close)
-
-tnx_analysis <- tnx_clean %>%
-  select(Date, Close)
 ```
 
-# 9. Convert Daily Observations into Monthly Data
-
-Bitcoin trades every day, whereas the stock and
-Treasury markets generally operate on business days.
-
-To make the investment comparisons consistent,
-we extract the final available observation
-for each calendar month.
-
+# Select monthly data
 ```{r monthly-function}
 get_monthly_data <- function(data) {
 
@@ -121,26 +92,13 @@ get_monthly_data <- function(data) {
 }
 ```
 
-We apply the function to all four datasets.
-
 ```{r monthly-datasets}
 btc_monthly <- get_monthly_data(btc_analysis)
-
 sp500_monthly <- get_monthly_data(sp500_analysis)
-
 ief_monthly <- get_monthly_data(ief_analysis)
-
-tnx_monthly <- get_monthly_data(tnx_analysis)
 ```
 
-# 10. Combine the Monthly Datasets
-
-We combine the three investment datasets using
-their common calendar months.
-
-This ensures that all three investments are
-compared over the same monthly periods.
-
+# combine monthly datasets
 ```{r combine-data}
 monthly_combined <- btc_monthly %>%
   select(Month, Bitcoin = Adjusted_Close) %>%
@@ -155,95 +113,41 @@ monthly_combined <- btc_monthly %>%
     by = "Month"
   ) %>%
   arrange(Month)
-
-kable(
-  head(monthly_combined),
-  caption = "First Six Observations of Combined Monthly Data"
-)
 ```
 
-# 11. Examine the Cleaned Datasets
-
-We summarize the cleaned observations and
-their date ranges.
-
+# Examine  Cleaned Datasets
 ```{r cleaned-summary}
 cleaned_summary <- data.frame(
-  Asset = c("Bitcoin", "S&P 500", "IEF", "Treasury Yield"),
+  Asset = c("Bitcoin", "S&P 500", "IEF"),
 
   Observations = c(
     nrow(btc_clean),
     nrow(sp500_clean),
     nrow(ief_clean),
-    nrow(tnx_clean)
   ),
 
   Missing_Values = c(
     sum(is.na(btc_clean)),
     sum(is.na(sp500_clean)),
     sum(is.na(ief_clean)),
-    sum(is.na(tnx_clean))
   ),
 
   First_Date = c(
     min(btc_clean$Date),
     min(sp500_clean$Date),
     min(ief_clean$Date),
-    min(tnx_clean$Date)
   ),
 
   Last_Date = c(
     max(btc_clean$Date),
     max(sp500_clean$Date),
     max(ief_clean$Date),
-    max(tnx_clean$Date)
   )
 )
-
-kable(
-  cleaned_summary,
-  caption = "Summary of Cleaned Financial Datasets"
-)
 ```
-
-# 12. Save the Cleaned Datasets
-
-Finally, we save the cleaned daily and monthly
-datasets for use in subsequent analysis.
-
+# save cleaned datasets
 ```{r save-data}
 dir.create("Output", showWarnings = FALSE)
-
-save(
-  btc_clean,
-  sp500_clean,
-  tnx_clean,
-  ief_clean,
-  btc_monthly,
-  sp500_monthly,
-  tnx_monthly,
-  ief_monthly,
-  monthly_combined,
-  file = "Output/cleaned_data.RData"
-)
-
-write.csv(
-  monthly_combined,
-  "Output/monthly_combined.csv",
-  row.names = FALSE
-)
+save(btc_clean,sp500_clean, ief_clean, btc_monthly,sp500_monthly,ief_monthly,monthly_combined,file = "Output/cleaned_data.RData")
+write.csv(monthly_combined,"Output/monthly_combined.csv",row.names = FALSE)
 ```
-
-# 13. Conclusion
-
-The four financial datasets have been imported,
-inspected, cleaned, and converted into monthly
-observations.
-
-The three investment datasets have also been
-combined using their common calendar months.
-
-The resulting datasets are now prepared for
-the next stage of the analysis: calculating
-investment returns and comparing portfolio
-performance.

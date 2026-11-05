@@ -21,7 +21,7 @@ https://finance.yahoo.com/quote/BTC-USD/history
 S&P 500:
 https://finance.yahoo.com/quote/%5EGSPC/
 
-U.S. Treasury Bonds: using 10 Year Treasury and 7-10 year ($IEF & $TNX)
+U.S. Treasury Bonds: using 10 Year Treasury ($IEF)
 https://finance.yahoo.com/quote/IEF/history/?period1=1577836800&period2=1790812800
 
 # Repository Structure: 
@@ -49,11 +49,11 @@ The analysis compares three investment portfolios over the same historical perio
 **Monthly Contribution Strategy**: Each portfolio receives an additional $500 contribution every month, regardless of market performance. The accumulated portfolio values are compared at the end of the study period.
 
 **Additional statistical measures include:**
-- Total investment return.
-- Compound annual growth rate (CAGR).
-- Monthly investment returns.
-- Investment volatility.
-- Maximum portfolio drawdown.
+- Total investment return
+- Compound annual growth rate
+- Monthly investment returns
+- Investment volatility
+- Maximum portfolio drawdown
 
 
 # Step By Step Instructions
