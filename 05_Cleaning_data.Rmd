@@ -2,7 +2,6 @@
 ```{r setup, message=FALSE, warning=FALSE}
 source("00_requirements.R")
 source("04_Functions.R")
-library(dplyr)
 library(tidyr)
 library(lubridate)
 library(knitr)
@@ -52,23 +51,25 @@ ief_clean <- clean_market_data(ief_raw, "IEF")
 start_date <- as.Date("2020-01-01")
 end_date <- as.Date("2026-10-01")
 
-btc_clean <- btc_clean %>%
-  filter(Date >= start_date, Date <= end_date)
-
-sp500_clean <- sp500_clean %>%
-  filter(Date >= start_date, Date <= end_date)
-
-ief_clean <- ief_clean %>%
-  filter(Date >= start_date, Date <= end_date)
+btc_clean <- btc_clean[
+  btc_clean$Date >= start_date &
+  btc_clean$Date <= end_date,
+]
+sp500_clean <- sp500_clean[
+  sp500_clean$Date >= start_date &
+  sp500_clean$Date <= end_date,
+]
+ief_clean <- ief_clean[
+  ief_clean$Date >= start_date &
+  ief_clean$Date <= end_date,
+]
 ```
+
 # Select variables
 ```{r select-variables}
-btc_analysis <- btc_clean %>%
-  select(Date, Adjusted_Close)
-sp500_analysis <- sp500_clean %>%
-  select(Date, Adjusted_Close)
-ief_analysis <- ief_clean %>%
-  select(Date, Adjusted_Close)
+btc_analysis <- btc_clean[, c("Date", "Adjusted_Close")]
+sp500_analysis <- sp500_clean[, c("Date", "Adjusted_Close")]
+ief_analysis <- ief_clean[, c("Date", "Adjusted_Close")]
 ```
 # Select monthly data
 ```{r monthly-datasets}
@@ -78,19 +79,21 @@ ief_monthly <- get_monthly_data(ief_analysis)
 ```
 # combine monthly datasets
 ```{r combine-data}
-monthly_combined <- btc_monthly %>%
-  select(Month, Bitcoin = Adjusted_Close) %>%
-  inner_join(
-    sp500_monthly %>%
-      select(Month, SP500 = Adjusted_Close),
-    by = "Month"
-  ) %>%
-  inner_join(
-    ief_monthly %>%
-      select(Month, IEF = Adjusted_Close),
-    by = "Month"
-  ) %>%
-  arrange(Month)
+btc_temp <- btc_monthly[, c("Month", "Adjusted_Close")]
+names(btc_temp)[2] <- "Bitcoin"
+
+sp500_temp <- sp500_monthly[, c("Month", "Adjusted_Close")]
+names(sp500_temp)[2] <- "SP500"
+
+ief_temp <- ief_monthly[, c("Month", "Adjusted_Close")]
+names(ief_temp)[2] <- "IEF"
+
+monthly_combined <- merge(btc_temp, sp500_temp, by = "Month")
+monthly_combined <- merge(monthly_combined, ief_temp, by = "Month")
+monthly_combined <- monthly_combined[
+  order(monthly_combined$Month),
+]
+rownames(monthly_combined) <- NULL
 ```
 # Examine cleaned datasets
 ```{r cleaned-summary}
@@ -117,10 +120,7 @@ cleaned_summary <- data.frame(
     max(ief_clean$Date)
   )
 )
-kable(
-  cleaned_summary,
-  caption = "Summary of Cleaned Investment Datasets"
-)
+cleaned_summary
 ```
 # save cleaned datasets
 ```{r save-data}

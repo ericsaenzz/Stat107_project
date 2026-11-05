@@ -32,10 +32,15 @@ clean_market_data <- function(data, asset_name) {
 # observation for each month.
 
 get_monthly_data <- function(data) {
-  data$Month <- as.Date(format(data$Date, "%Y-%m-01") )=
-  monthly_data <- data[!duplicated(data$Month, fromLast = TRUE),]
-  monthly_data <- monthly_data[order(monthly_data$Month),]
-  
+
+  data$Month <- as.Date(format(data$Date, "%Y-%m-01"))
+  monthly_data <- data[
+    !duplicated(data$Month, fromLast = TRUE),
+  ]
+  monthly_data <- monthly_data[
+    order(monthly_data$Month),
+  ]
+
   return(monthly_data)
 }
 #---------------------------------------- 
